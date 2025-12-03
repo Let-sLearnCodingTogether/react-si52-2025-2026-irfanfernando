@@ -4,17 +4,14 @@ import {Button} from "react-bootstrap"
 import ApiClient from "../../../utils/ApiClient"
 import { NavLink } from "react-router"
 
-
-interface SignUpForm {
-    username : string,
+interface SignInForm {
+    
     email : string,
     password : string,
 }
 
-function SignUp() {
-
-    const [form, setform] = useState<SignUpForm>({
-        username: "",
+function SignIn(){
+    const [form, setform] = useState<SignInForm>({
         email: "",
         password: "",
     })
@@ -31,27 +28,16 @@ function SignUp() {
         event.preventDefault()
 
         try{
-            const response = await ApiClient.post("/signup",form)
+            const response = await ApiClient.post("/signin",form)
 
-            console.log(response)
+            console.log(response.data)
         }catch(error){
             console.log(error)
         }
     }
-  return <div className="container mx-auto  ">
-    <h1>Sign Up Page</h1>
 
-    
-      <Form onSubmit={onSubmit}>
-
-          <Form.Group className="mb-3" controlId="formusername">
-              <Form.Label>username</Form.Label>
-              <Form.Control onChange={onHandleChange}
-              value={form.username}
-                  name="username"
-                  type="text"
-                  placeholder="username" />
-          </Form.Group>
+    return <div className="container mx-auto  " >Sign In Page
+ <Form onSubmit={onSubmit}>
            <Form.Group className="mb-3" controlId="formemail">
               <Form.Label>email</Form.Label>
               <Form.Control onChange={onHandleChange}
@@ -68,11 +54,12 @@ function SignUp() {
                   type="password"
                   placeholder="password" />
           </Form.Group>
-          <Button type = "submit" variant = "primary">Signup</Button>
+          <Button type = "submit" variant = "primary">Sign In</Button>
           <NavLink to="/signin">Sign In</NavLink>
 
       </Form>
-      
-  </div>
+    </div>
 }
-export default SignUp
+
+
+export default SignIn
